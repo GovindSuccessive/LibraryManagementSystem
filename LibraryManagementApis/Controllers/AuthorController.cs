@@ -2,6 +2,7 @@
 using LibraryMvc.Models.Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace LibraryManagementApis.Controllers
 {
@@ -15,10 +16,35 @@ namespace LibraryManagementApis.Controllers
             _libraryDbContext = libraryDbContext;
         }
         [HttpGet]
-        public IEnumerable<Author> GetAuthorList()
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IEnumerable<Author>> GetAuthorList()
         {
-            var author = _libraryDbContext.Author.ToList();
-            return author;
+            return await _libraryDbContext.Author.ToListAsync();
+        }
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<Author>> AddAuthor(Author author)
+        {
+            if (author == null)
+            {
+
+                return BadRequest("Author is Null");
+            }
+            else
+            {
+                var arth = new Author()
+                {
+                   AuthorName=author.AuthorName,
+                   AuthorEmail=author.AuthorEmail,
+                   Books = author.Books,
+                };
+                await _libraryDbContext.Author.AddAsync(arth);
+                await _libraryDbContext.SaveChangesAsync();
+                return Ok("Author Successfully Added");
+            }
         }
 
 
