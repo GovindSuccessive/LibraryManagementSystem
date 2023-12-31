@@ -1,0 +1,32 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="text-center m-4"><h3>Author List</h3></div>
+
+@model List<LibraryMvc.Models.Domain.Author>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+            <td>Id</td>
+            <td>Name</td>
+            <td>Email</td>
+                @*  <td>Book Name</td> *@
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model)
+        {
+            <tr>
+                <td>@x.AuthorId</td>
+                <td>@x.AuthorName</td>
+                <td>@x.AuthorEmail</td>
+                @* <td>@x.Books</td> *@
+            </tr>
+        }
+    </tbody>
+</table>

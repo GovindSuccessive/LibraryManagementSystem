@@ -1,0 +1,39 @@
+﻿@model LibraryMvc.Models.AddAuthorDto;
+
+
+<p>@ViewBag.Success</p>
+<div class="container">
+    <div class="box p-5">
+        <div class="row d-flex justify-content-center mt-5 border-dark border-2">
+            <div class="col-6">
+                <form action="AddStudent" method="post" enctype="multipart/form-data" class="bg-light p-3">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="title text-center mb-5  fw-bold "><h3>Add-Author</h3></div>
+                    <div class="row mb-3 d-flex justify-content-between ">
+                        <div class="col-3">
+                            <label for="authorname" class="form-label">Author Name</label>
+                        </div>
+                        <div class="col-6 offset-3">
+                            <input type="text" class="form-control" id="authorname" asp-for="AuthorName" asp-action="AddAuthor" asp-controller="Author" data-val="true" required maxlength="50">
+                        </div>
+                        @* <span asp-validation-for="Name" class="text-danger"></span> *@
+                    </div>
+                    <div class="row mb-3 d-flex justify-content-between">
+                        <div class="col-3">
+                            <label for="email" class="form-label">Email</label>
+                        </div>
+                        <div class="col-6 offset-3">
+                            <input type="email" class="form-control" id="email" asp-for="AuthorEmail" asp-action="AddAuthor" asp-controller="Author" data-val="true" required maxlength="50">
+                        </div>
+                        @* <span asp-validation-for="Name" class="text-danger"></span> *@
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="reset" class="btn btn-primary">Reset</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
